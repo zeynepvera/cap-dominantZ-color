@@ -85,22 +85,31 @@ class Degree(Config):
         title = "Angle"
 
 
-class PackageInputs(Inputs):
+class ColorDominantInputs(Inputs):
     inputImage: InputImage
 
+"""
 
-class PackageConfigs(Configs):
+class ColorDominantConfigs(Configs):
     degree: Degree
     drawBBox: KeepSideBBox
+    """
+
+class ColorDominantConfigs(Configs):
+    colorClusters: ColorClusters
+    maxIterations: MaxIterations
+    targetSize: TargetSize
 
 
-class PackageOutputs(Outputs):
+
+
+class ColorDominantOutputs(Outputs):
     outputImage: OutputImage
 
 
-class PackageRequest(Request):
-    inputs: Optional[PackageInputs]
-    configs: PackageConfigs
+class ColorDominantRequest(Request):
+    inputs: Optional[ColorDominantInputs]
+    configs: ColorDominantConfigs
 
     class Config:
         json_schema_extra = {
@@ -108,18 +117,18 @@ class PackageRequest(Request):
         }
 
 
-class PackageResponse(Response):
-    outputs: PackageOutputs
+class ColorDominantResponse(Response):
+    outputs: ColorDominantOutputs
 
 
-class PackageExecutor(Config):
-    name: Literal["Package"] = "Package"
-    value: Union[PackageRequest, PackageResponse]
+class ColorDominant(Config):
+    name: Literal["ColorDominant"] = "ColorDominant"
+    value: Union[ColorDominantRequest, ColorDominantResponse]
     type: Literal["object"] = "object"
     field: Literal["option"] = "option"
 
     class Config:
-        title = "Package"
+        title = "ColorDominant"
         json_schema_extra = {
             "target": {
                 "value": 0
@@ -129,7 +138,7 @@ class PackageExecutor(Config):
 
 class ConfigExecutor(Config):
     name: Literal["ConfigExecutor"] = "ConfigExecutor"
-    value: Union[PackageExecutor]
+    value: Union[ColorDominant]
     type: Literal["executor"] = "executor"
     field: Literal["dependentDropdownlist"] = "dependentDropdownlist"
 
@@ -147,4 +156,4 @@ class PackageConfigs(Configs):
 class PackageModel(Package):
     configs: PackageConfigs
     type: Literal["component"] = "component"
-    name: Literal["Package"] = "Package"
+    name: Literal["ColorDominant"] = "ColorDominant"
