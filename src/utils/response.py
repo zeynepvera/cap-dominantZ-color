@@ -1,7 +1,7 @@
 
 from sdks.novavision.src.helper.package import PackageHelper
-from capsules.Package.src.models.PackageModel import ColorDominantResponse, ColorDominantOutputs, ColorDominant, OutputDominantColor
-from capsules.Package.src.models.PackageModel import PackageModel, PackageConfigs, ConfigExecutor
+from capsules.ColorDominant.src.models.PackageModel import ColorDominantResponse, ColorDominantOutputs, ColorDominant, OutputDominantColor
+from capsules.ColorDominant.src.models.PackageModel import PackageModel, PackageConfigs, ConfigExecutor
 
 def build_response(context):
     dominant = OutputDominantColor(value=context.dominantColor)
