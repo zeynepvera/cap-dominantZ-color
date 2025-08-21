@@ -1,12 +1,12 @@
 
 from sdks.novavision.src.helper.package import PackageHelper
-from components.Package.src.models.PackageModel import ColorDominantResponse, ColorDominantOutputs, ColorDominant
-from components.Package.src.models.PackageModel import PackageModel, PackageConfigs, ConfigExecutor, OutputImage
+from components.Package.src.models.PackageModel import ColorDominantResponse, ColorDominantOutputs, ColorDominant, OutputDominantColor
+from components.Package.src.models.PackageModel import PackageModel, PackageConfigs, ConfigExecutor
 
 def build_response(context):
-    outputImage = OutputImage(value=context.image)
-    Outputs = ColorDominantOutputs(outputImage=outputImage)
-    colorDominantResponse = ColorDominantResponse(outputs=Outputs)
+    dominant = OutputDominantColor(value=context.dominantColor)
+    outputs = ColorDominantOutputs(dominantColor=dominant)
+    colorDominantResponse = ColorDominantResponse(outputs=outputs)
     colorDominant = ColorDominant(value=colorDominantResponse)
     executor = ConfigExecutor(value=colorDominant)
     packageConfigs = PackageConfigs(executor=executor)
