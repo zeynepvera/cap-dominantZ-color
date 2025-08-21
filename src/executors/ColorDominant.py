@@ -10,13 +10,13 @@ import numpy as np
 sys.path.append(os.path.join(os.path.dirname(__file__), '../../../../'))
 
 from sdks.novavision.src.media.image import Image
-from sdks.novavision.src.base.component import Component
+from sdks.novavision.src.base.capsule import Capsule
 from sdks.novavision.src.helper.executor import Executor
-from components.Package.src.utils.response import build_response
-from components.Package.src.models.PackageModel import PackageModel
+from capsules.ColorDominant.src.utils.response import build_response
+from capsules.ColorDominant.src.models.PackageModel import PackageModel
 
 
-class Package(Component):
+class ColorDominant(Capsule):
     def __init__(self, request, bootstrap):
         super().__init__(request, bootstrap)
         self.request.model = PackageModel(**(self.request.data))
