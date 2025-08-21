@@ -35,16 +35,24 @@ class ColorDominantInputs(Inputs):
     inputImage: InputImage
 
 class ColorClusters(Config):
+
+    """Number of dominant colors to identify. Higher values increase precision but may slow processing.
+
+    """
     name: Literal["colorClusters"] = "colorClusters"
     value: int = Field(default=4, ge=1, le=10)
     type: Literal["number"] = "number"
     field: Literal["textInput"] = "textInput"
 
     class Config:
-        title = "Color Clusters (K)"
+        title = "Color Clusters"
 
 
 class MaxIterations(Config):
+
+    """"
+    Max number of iterations to perform. Higher values increase precision but may slow processing.
+    """
     name: Literal["maxIterations"] = "maxIterations"
     value: int = Field(default=100, ge=1, le=500)
     type: Literal["number"] = "number"
@@ -55,13 +63,17 @@ class MaxIterations(Config):
 
 
 class TargetSize(Config):
+
+    """"
+    Sets target for the smallest dimension of the downsampled image in pixels. Lower values increase speed but may reduce precision.
+    """
     name: Literal["targetSize"] = "targetSize"
     value: int = Field(default=150, ge=1, le=250)
     type: Literal["number"] = "number"
     field: Literal["textInput"] = "textInput"
 
     class Config:
-        title = "Downsample Target (px)"
+        title = "Downsample Target "
 
 
 class ColorDominantConfigs(Configs):
