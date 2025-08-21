@@ -21,79 +21,48 @@ class InputImage(Input):
         title = "Image"
 
 
-class OutputImage(Output):
-    name: Literal["outputImage"] = "outputImage"
-    value: Union[List[Image],Image]
-    type: str = "object"
-
-    @validator("type", pre=True, always=True)
-    def set_type_based_on_value(cls, value, values):
-        value = values.get('value')
-        if isinstance(value, Image):
-            return "object"
-        elif isinstance(value, list):
-            return "list"
+class OutputDominantColor(Output):
+    name: Literal["dominantColor"] = "dominantColor"
+    value: str
+    type: Literal["string"] = "string"
 
     class Config:
-        title = "Image"
+        title = "Dominant Color (RGB)"
 
-
-class KeepSideFalse(Config):
-    name: Literal["False"] = "False"
-    value: Literal[False] = False
-    type: Literal["bool"] = "bool"
-    field: Literal["option"] = "option"
-
-    class Config:
-        title = "Disable"
-
-
-class KeepSideTrue(Config):
-    name: Literal["True"] = "True"
-    value: Literal[True] = True
-    type: Literal["bool"] = "bool"
-    field: Literal["option"] = "option"
-
-    class Config:
-        title = "Enable"
-
-
-class KeepSideBBox(Config):
-    """
-        Rotate image without catting off sides.
-    """
-    name: Literal["KeepSide"] = "KeepSide"
-    value: Union[KeepSideTrue, KeepSideFalse]
-    type: Literal["object"] = "object"
-    field: Literal["dropdownlist"] = "dropdownlist"
-
-    class Config:
-        title = "Keep Sides"
-
-
-class Degree(Config):
-    """
-        Positive angles specify counterclockwise rotation while negative angles indicate clockwise rotation.
-    """
-    name: Literal["Degree"] = "Degree"
-    value: int = Field(ge=-359.0, le=359.0,default=0)
-    type: Literal["number"] = "number"
-    field: Literal["textInput"] = "textInput"
-    placeHolder: Literal["[-359, 359]"] = "[-359, 359]"
-
-    class Config:
-        title = "Angle"
 
 
 class ColorDominantInputs(Inputs):
     inputImage: InputImage
 
-"""
+class ColorClusters(Config):
+    name: Literal["colorClusters"] = "colorClusters"
+    value: int = Field(default=4, ge=1, le=10)
+    type: Literal["number"] = "number"
+    field: Literal["textInput"] = "textInput"
 
-class ColorDominantConfigs(Configs):
-    degree: Degree
-    drawBBox: KeepSideBBox
-    """
+    class Config:
+        title = "Color Clusters (K)"
+
+
+class MaxIterations(Config):
+    name: Literal["maxIterations"] = "maxIterations"
+    value: int = Field(default=100, ge=1, le=500)
+    type: Literal["number"] = "number"
+    field: Literal["textInput"] = "textInput"
+
+    class Config:
+        title = "Max Iterations"
+
+
+class TargetSize(Config):
+    name: Literal["targetSize"] = "targetSize"
+    value: int = Field(default=150, ge=1, le=250)
+    type: Literal["number"] = "number"
+    field: Literal["textInput"] = "textInput"
+
+    class Config:
+        title = "Downsample Target (px)"
+
 
 class ColorDominantConfigs(Configs):
     colorClusters: ColorClusters
@@ -104,7 +73,8 @@ class ColorDominantConfigs(Configs):
 
 
 class ColorDominantOutputs(Outputs):
-    outputImage: OutputImage
+    dominantColor: OutputDominantColor
+
 
 
 class ColorDominantRequest(Request):
