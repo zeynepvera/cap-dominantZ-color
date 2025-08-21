@@ -27,8 +27,6 @@ class Package(Component):
 
         self.image = self.request.get_param("inputImage")
 
-        # Output placeholder (string döneceğiz)
-        self.dominantColor: str = ""
 
     @staticmethod
     def bootstrap(config: dict) -> dict:
