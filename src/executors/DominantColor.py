@@ -1,5 +1,5 @@
 """
-    ColorDominant: K-Means ile baskın rengi hesaplar ve STRING olarak döndürür.
+    DominantColor: K-Means ile baskın rengi hesaplar ve STRING olarak döndürür.
 """
 
 import os
@@ -12,11 +12,11 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '../../../../'))
 from sdks.novavision.src.media.image import Image
 from sdks.novavision.src.base.capsule import Capsule
 from sdks.novavision.src.helper.executor import Executor
-from capsules.ColorDominant.src.utils.response import build_response
-from capsules.ColorDominant.src.models.PackageModel import PackageModel
+from capsules.DominantColor.src.utils.response import build_response
+from capsules.DominantColor.src.models.PackageModel import PackageModel
 
 
-class ColorDominant(Capsule):
+class DominantColor(Capsule):
     def __init__(self, request, bootstrap):
         super().__init__(request, bootstrap)
         self.request.model = PackageModel(**(self.request.data))
