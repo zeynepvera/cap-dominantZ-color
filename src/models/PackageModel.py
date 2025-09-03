@@ -31,7 +31,7 @@ class OutputDominantColor(Output):
 
 
 
-class ColorDominantInputs(Inputs):
+class DominantColorInputs(Inputs):
     inputImage: InputImage
 
 class ColorClusters(Config):
@@ -76,7 +76,7 @@ class TargetSize(Config):
         title = "Downsample Target "
 
 
-class ColorDominantConfigs(Configs):
+class DominantColorConfigs(Configs):
     colorClusters: ColorClusters
     maxIterations: MaxIterations
     targetSize: TargetSize
@@ -84,14 +84,14 @@ class ColorDominantConfigs(Configs):
 
 
 
-class ColorDominantOutputs(Outputs):
+class DominantColorOutputs(Outputs):
     dominantColor: OutputDominantColor
 
 
 
-class ColorDominantRequest(Request):
-    inputs: Optional[ColorDominantInputs]
-    configs: ColorDominantConfigs
+class DominantColorRequest(Request):
+    inputs: Optional[DominantColorInputs]
+    configs: DominantColorConfigs
 
     class Config:
         json_schema_extra = {
@@ -99,18 +99,18 @@ class ColorDominantRequest(Request):
         }
 
 
-class ColorDominantResponse(Response):
-    outputs: ColorDominantOutputs
+class DominantColorResponse(Response):
+    outputs: DominantColorOutputs
 
 
-class ColorDominant(Config):
-    name: Literal["ColorDominant"] = "ColorDominant"
-    value: Union[ColorDominantRequest, ColorDominantResponse]
+class DominantColor(Config):
+    name: Literal["DominantColor"] = "DominantColor"
+    value: Union[DominantColorRequest, DominantColorResponse]
     type: Literal["object"] = "object"
     field: Literal["option"] = "option"
 
     class Config:
-        title = "ColorDominant"
+        title = "DominantColor"
         json_schema_extra = {
             "target": {
                 "value": 0
@@ -120,7 +120,7 @@ class ColorDominant(Config):
 
 class ConfigExecutor(Config):
     name: Literal["ConfigExecutor"] = "ConfigExecutor"
-    value: Union[ColorDominant]
+    value: Union[DominantColor]
     type: Literal["executor"] = "executor"
     field: Literal["dependentDropdownlist"] = "dependentDropdownlist"
 
@@ -138,4 +138,4 @@ class PackageConfigs(Configs):
 class PackageModel(Package):
     configs: PackageConfigs
     type: Literal["capsule"] = "capsule"
-    name: Literal["ColorDominant"] = "ColorDominant"
+    name: Literal["DominantColor"] = "DominantColor"
